@@ -1,0 +1,20 @@
+# Credentials and local runtime state: never publish
+.env
+.env.*
+!.env.example
+*.dpapi
+auth.json
+settings_gpt.json
+state_gpt.json
+*_catalog_gpt.json
+claude_models_gpt.json
+claude_history_gpt.json
+*.log
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+runtime/
+logs/
