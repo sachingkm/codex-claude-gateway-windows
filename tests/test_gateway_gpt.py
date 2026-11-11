@@ -77,6 +77,8 @@ async def run():
         for m in claude:
             assert [x['effort'] for x in m['supported_reasoning_levels']] == ['low','medium','high','xhigh','max']
             assert m['context_window'] == 1000000
+        # Force a stale refresh independently of the Windows runner's uptime.
+        mod.gateway.last_gpt_refresh = float('-inf')
         etag = resp.headers['etag']
         resp = await client.get('/backend-api/codex/models', headers={'if-none-match':etag,'authorization':'Bearer fake-gpt-token'})
         assert resp.status_code == 304
@@ -152,3 +154,4 @@ try:
     asyncio.run(run())
 finally:
     task_temp.cleanup()
+
